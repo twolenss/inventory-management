@@ -1,42 +1,23 @@
-const BASE_URL = "http://localhost:5000/products";
+import { getProducts } from "../services/productService";
+import { useEffect, useState } from "react";
 
-async function handlResponse(response) {
-  if (!response.ok) {
-    throw new Error("Request Failed");
-  }
-  if (response.status === 204) return null;
+const useProducts = () => {
+  const [product, setProduct] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  return response.json();
-}
 
-export async function getProducts() {
-  const response = await fetch(BASE_URL);
-  return handlResponse(response);
-}
-export async function createProduct(product) {
-  const response = await fetch(BASE_URL, {
-    method: "POST",
-    headers: {
-      "Contend-type": "application/json",
-    },
-    body: JSON.stringify(product),
-  });
-  return handlResponse(response);
-}
-export async function updateProduct(product, id) {
-  const response = await fetch(`${BASE_URL}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(product),
-  });
-  return handlResponse(response);
-}
+  useEffect(() => {
+    try {
+      const data = getProducts();
+      setProduct(Array.isArray(data) ? data : null )
+    }
+    catch {
+      setError(error.message || 'An error occurred while fetching products')
+    }
+  },[])
 
-export async function deleteProduct(id) {
-  const response = await fetch(`${BASE_URL}/${id}`, {
-    method: "DELETE",
-  });
-  return handleResponse(response);
+  return { product, error , isLoading};
 }
+ 
+export default useProducts;

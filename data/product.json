@@ -1,1 +1,54 @@
-{}
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Keyboard",
+      "description": "Wireless mechanical keyboard",
+      "category": "Accessories",
+      "price": 1500,
+      "stock": 12,
+      "supplier": "ABC Supplies",
+      "dateAdded": "2026-08-20"
+    },
+    {
+      "id": "2",
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse",
+      "category": "Accessories",
+      "price": 850,
+      "stock": 5,
+      "supplier": "Tech World",
+      "dateAdded": "2026-08-21"
+    },
+    {
+      "id": "3",
+      "name": "Laptop",
+      "description": "15-inch business laptop",
+      "category": "Electronics",
+      "price": 35000,
+      "stock": 8,
+      "supplier": "ABC Computers",
+      "dateAdded": "2026-08-21"
+    },
+    {
+      "id": "4",
+      "name": "Office Chair",
+      "description": "Ergonomic office chair",
+      "category": "Furniture",
+      "price": 4500,
+      "stock": 0,
+      "supplier": "Office Depot",
+      "dateAdded": "2026-08-19"
+    },
+    {
+      "id": "5",
+      "name": "USB-C Cable",
+      "description": "1-meter USB-C charging and data cable",
+      "category": "Accessories",
+      "price": 450,
+      "stock": 25,
+      "supplier": "Tech World",
+      "dateAdded": "2026-08-18"
+    }
+  ]
+}
