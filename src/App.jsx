@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<Dashboard product={product} />} />
           <Route path="products">
             <Route index element={<Products  product={product}/>} />
             <Route path=":id" element={<ProductsDetails />} />

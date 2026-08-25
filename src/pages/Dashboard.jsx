@@ -1,12 +1,26 @@
-function Dashboard() {
+import { Link } from "react-router-dom";
+
+function Dashboard({ product }) {
+
+  const totalStock = product.length || 0;
+  const lowStock = product?.filter((item) => item.stock <= 5).length || 0;
+  const outOfStock = product?.filter((item) => item.stock === 0).length || 0;
+  const inventoryValue = product.reduce((total, item) => total + item.price * item.stock, 0);
+  const recentlyAdded = [...product].sort((a,b) => new Date(b.dateAdded) - new Date(a.dateAdded)).slice(0,2); 
   return (
     <div className="dashboard-main">
       <div className="summary-cards">
-        <h3>Welcome to your Inventory Management System</h3>
-        <p>Total Products:</p>
-        <p>Low Stock:</p>
-        <p>Out of Stock:</p>
-        <p>Inventory Value</p>
+        <Link to="/products">View products</Link>
+          <div className="stats-card">
+            <p>Total Products: {totalStock}</p>
+            <p>Low Stock: {lowStock}</p>
+            <p>Out of Stock: {outOfStock}</p>
+            <p>Inventory Value: ₱ {inventoryValue} </p>
+            <h2>Recently Added {
+              recentlyAdded.map((item) => (
+                <p key={item.id}>{item.name} - {item.dateAdded} </p>
+              ))}</h2>
+          </div>
       </div>
 
       <div className="inventory-overview">
@@ -21,7 +35,6 @@ function Dashboard() {
         <p>Wireless Mouse</p>
         <p>Office Chair</p>
         <p>USB Cable</p>
-        <button>View Products</button>
       </div>
 
       <div className="recent-products">

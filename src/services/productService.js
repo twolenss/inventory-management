@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:5000/products";
 
-async function handlResponse(response) {
+async function handleResponse(response) {
   if (!response.ok) {
     throw new Error("Request Failed");
   }
@@ -11,17 +11,22 @@ async function handlResponse(response) {
 
 export async function getProducts() {
   const response = await fetch(BASE_URL);
-  return handlResponse(response);
+  return handleResponse(response);
+}
+
+export async function getSingleProduct(id) {
+  const response = await fetch(`${BASE_URL}/${id}`);
+  return handleResponse(response);
 }
 export async function createProduct(product) {
   const response = await fetch(BASE_URL, {
     method: "POST",
     headers: {
-      "Contend-type": "application/json",
+      "Content-type": "application/json",
     },
     body: JSON.stringify(product),
   });
-  return handlResponse(response);
+  return handleResponse(response);
 }
 export async function updateProduct(product, id) {
   const response = await fetch(`${BASE_URL}/${id}`, {
@@ -31,7 +36,7 @@ export async function updateProduct(product, id) {
     },
     body: JSON.stringify(product),
   });
-  return handlResponse(response);
+  return handleResponse(response);
 }
 
 export async function deleteProduct(id) {
