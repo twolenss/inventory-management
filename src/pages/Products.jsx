@@ -1,21 +1,76 @@
 import { Link } from "react-router-dom";
-function Products({ product }) {
+import {
+  LoadingState,
+  ErrorState,
+  EmptyState,
+} from "../components/ProductStates";
+
+function Products({ product = [], isLoading, error }) {
+  if (isLoading) {
+    return <LoadingState />;
+  }
+
+  if (error) {
+    return <ErrorState message={error} />;
+  }
+
+  if (product.length === 0) {
+    return <EmptyState />;
+  }
+
   return (
-    <div className="products">
-      {product.map((products) => (
-        <div key={products.id}>
-          <p>{products.name}</p>
-          <p>{products.description}</p>
-          <p>Price: ${products.price}</p>
-          <div className="buttons">
-            <Link to={`/products/${products.id}`}>View</Link>
-            <Link to={`/products/${products.id}/edit`}>Edit</Link>
+    <div className="p-8">
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="text-3xl font-bold text-[#2c3e50]">
+          Products
+        </h2>
+
+        <Link
+          to="/products/add"
+          className="rounded bg-[#3498db] px-4 py-2 font-medium text-white transition hover:bg-[#2980b9]"
+        >
+          Add Product
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {product.map((products) => (
+          <div
+            key={products.id}
+            className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+          >
+            <h3 className="mb-2 text-xl font-semibold text-[#2c3e50]">
+              {products.name}
+            </h3>
+
+            <p className="mb-4 text-gray-600">
+              {products.description}
+            </p>
+
+            <p className="mb-4 text-lg font-semibold text-[#2c3e50]">
+              Price: ${products.price}
+            </p>
+
+            <div className="flex gap-3">
+              <Link
+                to={`/products/${products.id}`}
+                className="rounded bg-[#3498db] px-4 py-2 text-white hover:bg-[#2980b9]"
+              >
+                View
+              </Link>
+
+              <Link
+                to={`/products/${products.id}/edit`}
+                className="rounded bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
+              >
+                Edit
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
 
 export default Products;
-[];
