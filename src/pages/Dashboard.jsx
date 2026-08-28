@@ -100,26 +100,4 @@ function Dashboard({ product = [] }) {
 
 export default Dashboard;
 
-{/* 
-      <div className="inventory-overview">
-        <h3>Inventory overview</h3>
-        <p>In Stock:</p>
-        <p>Low Stock</p>
-        <p>Out of Stock: </p>
-      </div>
-
-      <div className="stock-products">
-        <h3>Low Stock Products </h3>
-        <p>Wireless Mouse</p>
-        <p>Office Chair</p>
-        <p>USB Cable</p>
-      </div>
-
-      <div className="recent-products">
-        <h3>Recently Added</h3>
-        <p>Laptop</p>
-        <p>Wireless Keyboard</p>
-        <p>Office Chair</p>
-      </div> */}
-
 

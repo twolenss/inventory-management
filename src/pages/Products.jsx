@@ -5,7 +5,7 @@ import {
   EmptyState,
 } from "../components/ProductStates";
 
-function Products({ product = [], isLoading, error }) {
+function Products({ product = [], isLoading, error, deleteProduct }) {
   if (isLoading) {
     return <LoadingState />;
   }
@@ -27,7 +27,7 @@ function Products({ product = [], isLoading, error }) {
 
         <Link
           to="/products/add"
-          className="rounded bg-[#3498db] px-4 py-2 font-medium text-white transition hover:bg-[#2980b9]"
+          className="rounded bg-[#58c020] px-4 py-2 font-medium text-white transition hover:bg-[#458920]"
         >
           Add Product
         </Link>
@@ -65,6 +65,9 @@ function Products({ product = [], isLoading, error }) {
               >
                 Edit
               </Link>
+
+              <button onClick={deleteProduct}
+              className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">Delete</button>
             </div>
           </div>
         ))}

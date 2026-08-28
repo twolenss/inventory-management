@@ -7,7 +7,7 @@ function Navbar() {
       </div>
       <div className="flex gap-6">
         <NavLink to="/" className="text-[#ecf0f1] no-underline px-4 py-2 rounded transition-all duration-300 ease-in-out font-medium hover:bg-[#34495e] hover:text-white [&.active]:bg-[#226087] [&.active]:text-white [&.active]:font-semibold">Dashboard</NavLink>
-        <NavLink to="/products"  className="text-[#ecf0f1] no-underline px-4 py-2 rounded transition-all duration-300 ease-in-out font-medium hover:bg-[#34495e] hover:text-white [&.active]:bg-[#226087] [&.active]:text-white [&.active]:font-semibold">Products</NavLink>
+        <NavLink to="/products"  className="text-[#ecf0f1] no-underline px-4 py-2 rounded transition-all duration-300 ease-in-out font-medium hover:bg-[#34495e] hover:text-white [&.active]:bg-[#226087] [&.active]:text-white [&.active]:font-semibold">Inventory</NavLink>
         <NavLink to="/categories"  className="text-[#ecf0f1] no-underline px-4 py-2 rounded transition-all duration-300 ease-in-out font-medium hover:bg-[#34495e] hover:text-white [&.active]:bg-[#226087] [&.active]:text-white [&.active]:font-semibold">Categories</NavLink>
       </div>
     </nav>

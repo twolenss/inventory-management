@@ -22,7 +22,7 @@ const useProducts = () => {
     fetchProducts();
   }, []);
 
-  const createProduct = async (product) => {
+  const createdProduct = async (product) => {
     const createdProduct = await createProduct(product);
     setProduct((prevProduct) => [...prevProduct, createdProduct]);
     return createProduct;
@@ -40,7 +40,7 @@ const useProducts = () => {
 
     return deleteProduct;
   }
-  return { product, error, isLoading, createProduct, updProduct, deleteProduct };
+  return { product, error, isLoading, createdProduct, updProduct, deleteProduct };
 };
 
 export default useProducts;
