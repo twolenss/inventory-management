@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { SuccessState } from "../components/ProductStates";
+
 function AddProduct({ createdProduct }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -7,6 +9,21 @@ function AddProduct({ createdProduct }) {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [supplier, setSupplier] = useState("");
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+ useEffect(() => {
+  if (success) {
+    console.log("Redirect timer started");
+
+    const timer = setTimeout(() => {
+      console.log("Navigating now");
+      navigate("/products");
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }
+}, [success, navigate]);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,6 +47,8 @@ function AddProduct({ createdProduct }) {
       setPrice("");
       setStock("");
       setSupplier("");
+
+      setSuccess(true);
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +60,7 @@ function AddProduct({ createdProduct }) {
         <h1 className="text-3xl font-bold text-[#2c3e50]">Add Product</h1>
 
         <Link to="/products" className="rounded-md bg-gray-500 px-4 py-2 font-medium text-white transition hover:bg-gray-600">
-          Cancel 
+          Cancel
         </Link>
       </div>
 

@@ -24,3 +24,12 @@ export function EmptyState({ title = "No products found", message = "Your invent
     </section>
   );
 }
+export function SuccessState({  title="Product Added!",
+      message="Your product was successfully added." }) {
+  return (
+    <section className="emptyState">
+      <h2>{title}</h2>
+      <p>{message}</p>
+    </section>
+  );
+}

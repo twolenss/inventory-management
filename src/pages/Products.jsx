@@ -5,7 +5,7 @@ import {
   EmptyState,
 } from "../components/ProductStates";
 
-function Products({ product = [], isLoading, error, deleteProduct }) {
+function Products({ product = [], isLoading, error, deletedProduct }) {
   if (isLoading) {
     return <LoadingState />;
   }
@@ -66,7 +66,7 @@ function Products({ product = [], isLoading, error, deleteProduct }) {
                 Edit
               </Link>
 
-              <button onClick={deleteProduct}
+              <button onClick={() => deletedProduct?.(products.id)}
               className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">Delete</button>
             </div>
           </div>

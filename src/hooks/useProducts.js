@@ -25,7 +25,7 @@ const useProducts = () => {
   const createdProduct = async (product) => {
     const createdProduct = await createProduct(product);
     setProduct((prevProduct) => [...prevProduct, createdProduct]);
-    return createProduct;
+    return createdProduct;
   };
 
   const updProduct = async (product, id) => {
@@ -34,13 +34,17 @@ const useProducts = () => {
     return updProduct;
   };
 
-  const deleteProduct = async (id) => {
-    const deleteProduct = await deleteProduct(id);
-    setProduct((prev) => prev.filter((e) => e.id !== id ))
-
-    return deleteProduct;
-  }
-  return { product, error, isLoading, createdProduct, updProduct, deleteProduct };
+  const deletedProduct = async (id) => {
+    try {
+      const delProduct = await deleteProduct(id);
+      setProduct((prev) => prev.filter((item) => item.id !== id));
+      return delProduct;
+    } catch (err) {
+      setError(err.message || "Failed to delete product");
+      throw err;
+    }
+  };
+  return { product, error, isLoading, createdProduct, updProduct, deletedProduct };
 };
 
 export default useProducts;

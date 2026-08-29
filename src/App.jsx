@@ -11,7 +11,7 @@ import useProducts from "./hooks/useProducts";
 import Navbar from "./components/Navbar";
 import Layout from "./layout/Layout";
 function App() {
-  const { product , error, isLoading, updProduct, createdProduct, deleteProduct} = useProducts();
+  const { product , error, isLoading, updProduct, createdProduct, deletedProduct} = useProducts();
   const [count, setCount] = useState(0);
   const [editingProduct, setEditingProduct] = useState(null)
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard product={product} />} />
           <Route path="products">
-            <Route index element={<Products product={product} error={error} isLoading={isLoading} deleteProduct={deleteProduct}/>} />
+            <Route index element={<Products product={product} error={error} isLoading={isLoading} deletedProduct={deletedProduct}/>} />
             <Route path=":id" element={<ProductsDetails />} />
             <Route path="add" element={<AddProduct createdProduct={createdProduct} />} />
             <Route path=":id/edit" element={<EditProduct />} />
