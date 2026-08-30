@@ -24,7 +24,7 @@ function App() {
             <Route index element={<Products product={product} error={error} isLoading={isLoading} deletedProduct={deletedProduct}/>} />
             <Route path=":id" element={<ProductsDetails />} />
             <Route path="add" element={<AddProduct createdProduct={createdProduct} />} />
-            <Route path=":id/edit" element={<EditProduct />} />
+            <Route path=":id/edit" element={<EditProduct updProduct={updProduct} />} />
           </Route>
           <Route path="categories" element={<Categories product={product}/>} />
         </Route>
