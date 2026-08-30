@@ -15,8 +15,8 @@
       "name": "Wireless Mouse",
       "description": "Ergonomic wireless mouse",
       "category": "Accessories",
-      "price": 850,
-      "stock": 5,
+      "price": 800,
+      "stock": 2,
       "supplier": "Tech World",
       "dateAdded": "2026-08-21"
     },
@@ -79,6 +79,16 @@
       "supplier": "ABC Supplies",
       "dateAdded": "2026-08-29",
       "id": "HZME5kEP8fQ"
+    },
+    {
+      "name": "Edifier blue 360",
+      "description": "asd",
+      "category": "Accessoreis",
+      "price": 1233,
+      "stock": 3,
+      "supplier": "ABC Supplies",
+      "dateAdded": "2026-08-29",
+      "id": "a1r1YGCWoWs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

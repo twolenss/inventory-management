@@ -29,9 +29,9 @@ const useProducts = () => {
   };
 
   const updProduct = async (product, id) => {
-    const updateProduct = await updateProduct(product, id);
-    setProduct((prev) => prev.map((e) => (e.id === id ? updateProduct : e)));
-    return updProduct;
+    const updatedProduct = await updateProduct(product, id);
+    setProduct((prev) => prev.map((e) => (e.id === id ? updatedProduct : e)));
+    return updatedProduct;
   };
 
   const deletedProduct = async (id) => {
