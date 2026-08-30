@@ -4,8 +4,14 @@ import {
   ErrorState,
   EmptyState,
 } from "../components/ProductStates";
+import { use, useState } from "react";
 
 function Products({ product = [], isLoading, error, deletedProduct }) {
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredProd = product.filter((item) => 
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()));
   if (isLoading) {
     return <LoadingState />;
   }
@@ -32,9 +38,23 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
           Add Product
         </Link>
       </div>
+       <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search products by name..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full rounded-md border border-gray-300 px-4 py-3 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+        />
+      </div>
+       {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {filteredProd.map((products) => (
+          <p key={products.id}>{products.name}</p>
+        ))}
+      </div> */}
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {product.map((products) => (
+        {filteredProd.map((products) => (
           <div
             key={products.id}
             className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
