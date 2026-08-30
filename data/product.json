@@ -36,7 +36,7 @@
       "description": "Ergonomic office chair",
       "category": "Furniture",
       "price": 4500,
-      "stock": 0,
+      "stock": 9,
       "supplier": "Office Depot",
       "dateAdded": "2026-08-19"
     },
@@ -53,7 +53,7 @@
     {
       "name": "Edifier blue 360",
       "description": "asdaa",
-      "category": "Accessoreis",
+      "category": "Accessories",
       "price": 1233,
       "stock": 3,
       "supplier": "ABC Supplies",
