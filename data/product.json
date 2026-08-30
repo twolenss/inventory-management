@@ -52,43 +52,13 @@
     },
     {
       "name": "Edifier blue 360",
-      "description": "12313",
+      "description": "asdaa",
       "category": "Accessoreis",
       "price": 1233,
       "stock": 3,
       "supplier": "ABC Supplies",
-      "dateAdded": "2026-08-29",
-      "id": "5C_l-_9KpnY"
-    },
-    {
-      "name": "Edifier blue 360",
-      "description": "bhj",
-      "category": "Accessoreis",
-      "price": 1233,
-      "stock": 3,
-      "supplier": "ABC Supplies",
-      "dateAdded": "2026-08-29",
-      "id": "GC_6ucBKK_U"
-    },
-    {
-      "name": "Edifier blue 360",
-      "description": "asdasd",
-      "category": "Accessoreis",
-      "price": 1233,
-      "stock": 3,
-      "supplier": "ABC Supplies",
-      "dateAdded": "2026-08-29",
-      "id": "HZME5kEP8fQ"
-    },
-    {
-      "name": "Edifier blue 360",
-      "description": "asd",
-      "category": "Accessoreis",
-      "price": 1233,
-      "stock": 3,
-      "supplier": "ABC Supplies",
-      "dateAdded": "2026-08-29",
-      "id": "a1r1YGCWoWs"
+      "dateAdded": "2026-08-30",
+      "id": "7EEwYtzciqs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
