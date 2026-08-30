@@ -8,12 +8,9 @@ import ProductsDetails from "./pages/ProductDetails";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import useProducts from "./hooks/useProducts";
-import Navbar from "./components/Navbar";
 import Layout from "./layout/Layout";
 function App() {
   const { product , error, isLoading, updProduct, createdProduct, deletedProduct} = useProducts();
-  const [count, setCount] = useState(0);
-  const [editingProduct, setEditingProduct] = useState(null)
 
   return (
     <BrowserRouter>
