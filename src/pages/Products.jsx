@@ -19,6 +19,7 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
 
     return matchesSearch && matchesCategory && matchesStock;
   });
+
   const resetFilters = () => {
     setSearchQuery("");
     setCategoryFilter("All");
@@ -39,80 +40,103 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
 
   if (filteredProd.length === 0) {
     return (
-      <div className="p-8 text-center">
-        <p className="text-gray-600">{searchQuery || categoryFilter !== "All" || stockFilter !== "All" ? `No products found matching your criteria` : "No products available"}</p>
+      <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
+        <p className="text-secondary-text">
+          {searchQuery || categoryFilter !== "All" || stockFilter !== "All"
+            ? "No products found matching your criteria"
+            : "No products available"}
+        </p>
       </div>
     );
   }
-  return (
-    <div className="p-8">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-3xl font-bold text-[#2c3e50]">Products</h2>
 
-        <Link to="/products/add" className="rounded bg-[#58c020] px-4 py-2 font-medium text-white transition hover:bg-[#458920]">
+  return (
+    <div className="space-y-6 p-2 md:p-4">
+      <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-3xl font-bold text-primary-text">Products</h2>
+
+        <Link
+          to="/products/add"
+          className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-medium text-primary-text transition hover:bg-[#e4b521]"
+        >
           Add Product
         </Link>
       </div>
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search products by name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-md border border-gray-300 px-4 py-3 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
-        />
+
+      <div className="rounded-2xl bg-surface p-4 shadow-sm">
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search products by name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-md border border-border bg-background px-4 py-3 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={stockFilter}
+            onChange={(e) => setStockFilter(e.target.value)}
+            className="rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+          >
+            <option value="All">All Stock</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Low Stock">Low Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="rounded-md border border-border bg-surface px-4 py-2.5 font-medium text-secondary-text transition hover:bg-border"
+          >
+            Reset Filters
+          </button>
+        </div>
       </div>
-      <div className="flex flex-wrap gap-4">
-        {/* Category Filter */}
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-          className="rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
-        >
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
 
-        {/* Stock Filter */}
-        <select
-          value={stockFilter}
-          onChange={(e) => setStockFilter(e.target.value)}
-          className="rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
-        >
-          <option value="All">All Stock</option>
-          <option value="In Stock">In Stock</option>
-          <option value="Low Stock">Low Stock</option>
-          <option value="Out of Stock">Out of Stock</option>
-        </select>
-
-        {/* Reset Button */}
-        <button onClick={resetFilters} className="rounded-md bg-gray-500 px-4 py-2 font-medium text-white transition hover:bg-gray-600">
-          Reset Filters
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filteredProd.map((products) => (
-          <div key={products.id} className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-            <h3 className="mb-2 text-xl font-semibold text-[#2c3e50]">{products.name}</h3>
+          <div key={products.id} className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border/80">
+            <h3 className="mb-2 text-xl font-semibold text-primary-text">{products.name}</h3>
 
-            <p className="mb-4 text-gray-600">{products.description}</p>
+            <p className="mb-4 min-h-[48px] text-secondary-text">{products.description}</p>
 
-            <p className="mb-4 text-lg font-semibold text-[#2c3e50]">Price: ${products.price}</p>
+            <p className="mb-5 text-lg font-semibold text-primary-text">Price: ₱{products.price}</p>
 
-            <div className="flex gap-3">
-              <Link to={`/products/${products.id}`} className="rounded bg-[#3498db] px-4 py-2 text-white hover:bg-[#2980b9]">
+            <div className="flex gap-2">
+              <Link
+                to={`/products/${products.id}`}
+                className="flex-1 rounded-lg border border-accent px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-accent/10"
+              >
                 View
               </Link>
 
-              <Link to={`/products/${products.id}/edit`} className="rounded bg-gray-600 px-4 py-2 text-white hover:bg-gray-700">
+              <Link
+                to={`/products/${products.id}/edit`}
+                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-border"
+              >
                 Edit
               </Link>
 
-              <button onClick={() => deletedProduct?.(products.id)} className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
+              <button
+                type="button"
+                onClick={() => deletedProduct?.(products.id)}
+                className="flex-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-secondary-text transition hover:bg-border"
+              >
                 Delete
               </button>
             </div>

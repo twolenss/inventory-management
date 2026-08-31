@@ -9,88 +9,53 @@ function Dashboard({ product = [] }) {
   );
 
   const recentlyAdded = [...product]
-    .sort(
-      (a, b) =>
-        new Date(b.dateAdded) - new Date(a.dateAdded)
-    )
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="mb-8 text-3xl font-bold text-[#2c3e50]">
-        Dashboard
-      </h1>
+    <div className="space-y-8 bg-background p-2 md:p-4">
+      <h1 className="text-3xl font-bold tracking-tight text-primary-text">Dashboard</h1>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-
-        {/* Total Products */}
-        <div className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-          <p className="text-sm font-medium text-gray-500">
-            Total Products
-          </p>
-          <p className="mt-2 text-3xl font-bold text-[#2c3e50]">
-            {totalStock}
-          </p>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
+          <p className="text-sm font-medium text-secondary-text">Total Products</p>
+          <p className="mt-2 text-3xl font-bold text-primary-text">{totalStock}</p>
         </div>
 
-        {/* Low Stock */}
-        <div className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-          <p className="text-sm font-medium text-gray-500">
-            Low Stock
-          </p>
-          <p className="mt-2 text-3xl font-bold text-yellow-500">
-            {lowStock}
-          </p>
+        <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
+          <p className="text-sm font-medium text-secondary-text">Low Stock</p>
+          <p className="mt-2 text-3xl font-bold text-accent">{lowStock}</p>
         </div>
 
-        {/* Out of Stock */}
-        <div className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-          <p className="text-sm font-medium text-gray-500">
-            Out of Stock
-          </p>
-          <p className="mt-2 text-3xl font-bold text-red-500">
-            {outOfStock}
-          </p>
+        <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
+          <p className="text-sm font-medium text-secondary-text">Out of Stock</p>
+          <p className="mt-2 text-3xl font-bold text-accent-warm">{outOfStock}</p>
         </div>
 
-        {/* Inventory Value */}
-        <div className="rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-          <p className="text-sm font-medium text-gray-500">
-            Inventory Value
-          </p>
-          <p className="mt-2 text-3xl font-bold text-green-600">
+        <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
+          <p className="text-sm font-medium text-secondary-text">Inventory Value</p>
+          <p className="mt-2 text-3xl font-bold text-primary-text">
             ₱ {inventoryValue.toLocaleString()}
           </p>
         </div>
       </div>
 
-      {/* Recently Added */}
-      <div className="mt-8 rounded-lg bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-        <h2 className="mb-4 text-2xl font-semibold text-[#2c3e50]">
-          Recently Added
-        </h2>
+      <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
+        <h2 className="mb-4 text-2xl font-semibold text-primary-text">Recently Added</h2>
 
         <div className="space-y-3">
           {recentlyAdded.length > 0 ? (
             recentlyAdded.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between rounded-md bg-gray-50 p-4"
+                className="flex items-center justify-between rounded-xl bg-background p-4"
               >
-                <p className="font-medium text-gray-700">
-                  {item.name}
-                </p>
-
-                <p className="text-sm text-gray-500">
-                  {item.dateAdded}
-                </p>
+                <p className="font-medium text-primary-text">{item.name}</p>
+                <p className="text-sm text-secondary-text">{item.dateAdded}</p>
               </div>
             ))
           ) : (
-            <p className="text-gray-500">
-              No products recently added.
-            </p>
+            <p className="text-secondary-text">No products recently added.</p>
           )}
         </div>
       </div>
@@ -99,5 +64,3 @@ function Dashboard({ product = [] }) {
 }
 
 export default Dashboard;
-
-

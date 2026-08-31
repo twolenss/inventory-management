@@ -59,6 +59,16 @@
       "supplier": "ABC Supplies",
       "dateAdded": "2026-08-30",
       "id": "7EEwYtzciqs"
+    },
+    {
+      "name": "RK 61 White ",
+      "description": "Mechanical Keyboard, Blue Keys",
+      "category": "Accessories",
+      "price": 2099,
+      "stock": 5,
+      "supplier": "FJR Supplies",
+      "dateAdded": "2026-08-31",
+      "id": "F4-Pq7HJkHA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

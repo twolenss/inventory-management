@@ -12,7 +12,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  // Populate form with initial data if in edit mode
   useEffect(() => {
     if (mode === "edit" && initialData) {
       setName(initialData.name || "");
@@ -26,12 +25,9 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
 
   useEffect(() => {
     if (success) {
-      console.log("Redirect timer started");
-
       const timer = setTimeout(() => {
-        console.log("Navigating now");
         navigate("/products");
-      }, 1500);
+      }, 1200);
 
       return () => clearTimeout(timer);
     }
@@ -49,7 +45,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       supplier,
     };
 
-    // Add dateAdded only for new products
     if (mode === "add") {
       data.dateAdded = new Date().toLocaleDateString("en-CA");
     }
@@ -79,21 +74,32 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       {success && (
         <SuccessState
           title={isAddMode ? "Product Added!" : "Product Updated!"}
-          message={isAddMode ? "Your product was successfully added." : "Your product was successfully updated."}
+          message={
+            isAddMode
+              ? "Your product was successfully added."
+              : "Your product was successfully updated."
+          }
         />
       )}
-      <form onSubmit={handleSubmit} className="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-[#2c3e50]">{pageTitle}</h1>
 
-          <Link to="/products" className="rounded-md bg-gray-500 px-4 py-2 font-medium text-white transition hover:bg-gray-600">
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border sm:p-8"
+      >
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <h1 className="text-3xl font-bold text-primary-text">{pageTitle}</h1>
+
+          <Link
+            to="/products"
+            className="rounded-md border border-border bg-background px-4 py-2 font-medium text-primary-text transition hover:bg-border"
+          >
             Cancel
           </Link>
         </div>
 
         <div className="space-y-5">
           <div>
-            <label htmlFor="name" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="name" className="mb-2 block font-medium text-secondary-text">
               Product Name
             </label>
 
@@ -104,12 +110,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter product name"
               required
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
           <div>
-            <label htmlFor="desc" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="desc" className="mb-2 block font-medium text-secondary-text">
               Description
             </label>
 
@@ -120,12 +126,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               placeholder="Enter product description"
               required
               rows="4"
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
           <div>
-            <label htmlFor="category" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="category" className="mb-2 block font-medium text-secondary-text">
               Category
             </label>
 
@@ -136,12 +142,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               onChange={(e) => setCategory(e.target.value)}
               placeholder="Enter category"
               required
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
           <div>
-            <label htmlFor="price" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="price" className="mb-2 block font-medium text-secondary-text">
               Price
             </label>
 
@@ -154,12 +160,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               min="0"
               step="0.01"
               required
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
           <div>
-            <label htmlFor="stock" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="stock" className="mb-2 block font-medium text-secondary-text">
               Stock
             </label>
 
@@ -171,12 +177,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               placeholder="Enter stock quantity"
               min="0"
               required
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
           <div>
-            <label htmlFor="supplier" className="mb-2 block font-medium text-gray-700">
+            <label htmlFor="supplier" className="mb-2 block font-medium text-secondary-text">
               Supplier
             </label>
 
@@ -187,11 +193,14 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
               onChange={(e) => setSupplier(e.target.value)}
               placeholder="Enter supplier"
               required
-              className="w-full rounded-md border border-gray-300 px-4 py-2 outline-none transition focus:border-[#3498db] focus:ring-2 focus:ring-[#3498db]/20"
+              className="w-full rounded-md border border-border bg-background px-4 py-2.5 text-primary-text outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
           </div>
 
-          <button type="submit" className="w-full rounded-md bg-[#3498db] px-4 py-3 font-semibold text-white transition hover:bg-[#2980b9]">
+          <button
+            type="submit"
+            className="w-full rounded-md bg-accent px-4 py-3 font-semibold text-primary-text transition hover:bg-[#e4b521]"
+          >
             {buttonText}
           </button>
         </div>

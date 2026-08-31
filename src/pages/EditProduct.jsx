@@ -29,24 +29,22 @@ function EditProduct({ updProduct }) {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="py-8 text-center text-secondary-text">Loading...</div>;
   }
 
   if (error) {
-    return <div className="text-center py-8 text-red-600">{error}</div>;
+    return <div className="py-8 text-center text-primary-text">{error}</div>;
   }
 
   if (!product) {
-    return <div className="text-center py-8 text-red-600">Product not found</div>;
+    return <div className="py-8 text-center text-primary-text">Product not found</div>;
   }
 
   const handleUpdate = async (formData) => {
     return updProduct(formData, id);
   };
 
-  return (
-    <ProductForm mode="edit" initialData={product} onSubmit={handleUpdate} />
-  );
+  return <ProductForm mode="edit" initialData={product} onSubmit={handleUpdate} />;
 }
 
 export default EditProduct;
