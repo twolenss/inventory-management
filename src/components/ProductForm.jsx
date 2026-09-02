@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { SuccessState } from "./ProductStates";
+import { useNavigate } from "react-router-dom";
 
 function ProductForm({ mode = "add", initialData = null, onSubmit }) {
   const [name, setName] = useState("");
@@ -9,7 +8,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [supplier, setSupplier] = useState("");
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,18 +21,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     }
   }, [mode, initialData]);
 
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => {
-        navigate("/products");
-      }, 1200);
-
-      return () => clearTimeout(timer);
-    }
-  }, [success, navigate]);
-
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!onSubmit) {
+      return;
+    }
 
     const data = {
       name,
@@ -48,6 +40,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     if (mode === "add") {
       data.dateAdded = new Date().toLocaleDateString("en-CA");
     }
+
     try {
       await onSubmit(data);
 
@@ -58,7 +51,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       setStock("");
       setSupplier("");
 
-      setSuccess(true);
+      navigate("/products", { replace: true });
     } catch (error) {
       console.error(error);
     }
@@ -70,13 +63,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
 
   return (
     <>
-      {success && (
-        <SuccessState
-          title={isAddMode ? "Product Added!" : "Product Updated!"}
-          message={isAddMode ? "Your product was successfully added." : "Your product was successfully updated."}
-        />
-      )}
-
       <form onSubmit={handleSubmit} className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border sm:p-8">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h1 className="text-3xl font-bold text-primary-text">{pageTitle}</h1>
@@ -86,7 +72,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              console.log("CANCEL CLICKED");
               navigate("/products");
             }}
             className="rounded-md border border-border bg-background px-4 py-2 font-medium text-primary-text transition hover:bg-border"
