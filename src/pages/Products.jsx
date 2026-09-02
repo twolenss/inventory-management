@@ -9,8 +9,9 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
   const [stockFilter, setStockFilter] = useState("All");
 
   const filteredProd = product.filter((item) => {
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = categoryFilter === "All" || item.category === categoryFilter;
+    const matchesSearch = (item.name || "").toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCategory = ["All", ...new Set(product.map((item) => item.category).filter(Boolean))];
 
     let matchesStock = true;
     if (stockFilter === "In Stock") matchesStock = item.stock > 0;
@@ -42,9 +43,7 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
     return (
       <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
         <p className="text-secondary-text">
-          {searchQuery || categoryFilter !== "All" || stockFilter !== "All"
-            ? "No products found matching your criteria"
-            : "No products available"}
+          {searchQuery || categoryFilter !== "All" || stockFilter !== "All" ? "No products found matching your criteria" : "No products available"}
         </p>
       </div>
     );
@@ -55,10 +54,7 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
       <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-3xl font-bold text-primary-text">Products</h2>
 
-        <Link
-          to="/products/add"
-          className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-medium text-primary-text transition hover:bg-[#e4b521]"
-        >
+        <Link to="/products/add" className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-medium text-primary-text transition hover:bg-[#e4b521]">
           Add Product
         </Link>
       </div>

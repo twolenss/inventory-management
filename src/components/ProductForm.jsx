@@ -48,7 +48,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     if (mode === "add") {
       data.dateAdded = new Date().toLocaleDateString("en-CA");
     }
-
     try {
       await onSubmit(data);
 
@@ -74,27 +73,26 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       {success && (
         <SuccessState
           title={isAddMode ? "Product Added!" : "Product Updated!"}
-          message={
-            isAddMode
-              ? "Your product was successfully added."
-              : "Your product was successfully updated."
-          }
+          message={isAddMode ? "Your product was successfully added." : "Your product was successfully updated."}
         />
       )}
 
-      <form
-        onSubmit={handleSubmit}
-        className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border sm:p-8"
-      >
+      <form onSubmit={handleSubmit} className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border sm:p-8">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h1 className="text-3xl font-bold text-primary-text">{pageTitle}</h1>
 
-          <Link
-            to="/products"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log("CANCEL CLICKED");
+              navigate("/products");
+            }}
             className="rounded-md border border-border bg-background px-4 py-2 font-medium text-primary-text transition hover:bg-border"
           >
             Cancel
-          </Link>
+          </button>
         </div>
 
         <div className="space-y-5">
@@ -197,10 +195,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-md bg-accent px-4 py-3 font-semibold text-primary-text transition hover:bg-[#e4b521]"
-          >
+          <button type="submit" className="w-full rounded-md bg-accent px-4 py-3 font-semibold text-primary-text transition hover:bg-[#e4b521]">
             {buttonText}
           </button>
         </div>

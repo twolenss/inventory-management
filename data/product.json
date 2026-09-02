@@ -69,6 +69,56 @@
       "supplier": "FJR Supplies",
       "dateAdded": "2026-08-31",
       "id": "F4-Pq7HJkHA"
+    },
+    {
+      "name": "N-Vison Monitor 144Hz 27' inches",
+      "description": "Gaming monitor ",
+      "category": "Accessories",
+      "price": 4700,
+      "stock": 20,
+      "supplier": "Ninja HQ",
+      "dateAdded": "2026-09-02",
+      "id": "ZpVIElTQNOU"
+    },
+    {
+      "name": "N-Vison Monitor 144Hz 27' inches",
+      "description": "asd",
+      "category": "Accessories",
+      "price": 4700,
+      "stock": 20,
+      "supplier": "Ninja HQ",
+      "dateAdded": "2026-09-02",
+      "id": "EaFXW6cnvVk"
+    },
+    {
+      "name": "N-Vison Monitor 144Hz 27' inches",
+      "description": "asddsad",
+      "category": "Accessories",
+      "price": 4700,
+      "stock": 20,
+      "supplier": "Ninja HQ",
+      "dateAdded": "2026-09-02",
+      "id": "ebkQiwfNe24"
+    },
+    {
+      "name": "N-Vison Monitor 144Hz 27' inches",
+      "description": "das",
+      "category": "Accessories",
+      "price": 4700,
+      "stock": 20,
+      "supplier": "Ninja HQ",
+      "dateAdded": "2026-09-02",
+      "id": "DY4cLeo48w8"
+    },
+    {
+      "name": "N-Vison Monitor 144Hz 27' inches",
+      "description": "sda",
+      "category": "Accessories",
+      "price": 4700,
+      "stock": 20,
+      "supplier": "Ninja HQ",
+      "dateAdded": "2026-09-02",
+      "id": "LOZw6Auabpk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
