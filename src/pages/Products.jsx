@@ -4,19 +4,25 @@ import { useState } from "react";
 
 function Products({ product = [], isLoading, error, deletedProduct }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const categories = ["All", ...new Set(product.map((item) => item.category))];
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [stockFilter, setStockFilter] = useState("All");
+
+  const categories = ["All", ...new Set(product.map((item) => item.category).filter(Boolean))];
 
   const filteredProd = product.filter((item) => {
     const matchesSearch = (item.name || "").toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesCategory = ["All", ...new Set(product.map((item) => item.category).filter(Boolean))];
+    const matchesCategory = categoryFilter === "All" || item.category === categoryFilter;
 
     let matchesStock = true;
-    if (stockFilter === "In Stock") matchesStock = item.stock > 0;
-    else if (stockFilter === "Low Stock") matchesStock = item.stock > 0 && item.stock <= 5;
-    else if (stockFilter === "Out of Stock") matchesStock = item.stock === 0;
+
+    if (stockFilter === "In Stock") {
+      matchesStock = item.stock > 0;
+    } else if (stockFilter === "Low Stock") {
+      matchesStock = item.stock > 0 && item.stock <= 5;
+    } else if (stockFilter === "Out of Stock") {
+      matchesStock = item.stock === 0;
+    }
 
     return matchesSearch && matchesCategory && matchesStock;
   });
@@ -39,16 +45,6 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
     return <EmptyState />;
   }
 
-  if (filteredProd.length === 0) {
-    return (
-      <div className="rounded-2xl bg-surface p-8 text-center shadow-sm">
-        <p className="text-secondary-text">
-          {searchQuery || categoryFilter !== "All" || stockFilter !== "All" ? "No products found matching your criteria" : "No products available"}
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6 p-2 md:p-4">
       <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -59,6 +55,7 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
         </Link>
       </div>
 
+      {/* Search and Filters */}
       <div className="rounded-2xl bg-surface p-4 shadow-sm">
         <div className="mb-4">
           <input
@@ -104,41 +101,48 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {filteredProd.map((products) => (
-          <div key={products.id} className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border/80">
-            <h3 className="mb-2 text-xl font-semibold text-primary-text">{products.name}</h3>
+      {/* Products */}
+      {filteredProd.length === 0 ? (
+        <div className="rounded-2xl bg-surface p-8 text-center shadow-sm ring-1 ring-border/80">
+          <p className="text-secondary-text">No products found matching your criteria.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProd.map((products) => (
+            <div key={products.id} className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border/80">
+              <h3 className="mb-2 text-xl font-semibold text-primary-text">{products.name}</h3>
 
-            <p className="mb-4 min-h-[48px] text-secondary-text">{products.description}</p>
+              <p className="mb-4 min-h-[48px] text-secondary-text">{products.description}</p>
 
-            <p className="mb-5 text-lg font-semibold text-primary-text">Price: ₱{products.price}</p>
+              <p className="mb-5 text-lg font-semibold text-primary-text">Price: ₱{products.price}</p>
 
-            <div className="flex gap-2">
-              <Link
-                to={`/products/${products.id}`}
-                className="flex-1 rounded-lg border border-accent px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-accent/10"
-              >
-                View
-              </Link>
+              <div className="flex gap-2">
+                <Link
+                  to={`/products/${products.id}`}
+                  className="flex-1 rounded-lg border border-accent px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-accent/10"
+                >
+                  View
+                </Link>
 
-              <Link
-                to={`/products/${products.id}/edit`}
-                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-border"
-              >
-                Edit
-              </Link>
+                <Link
+                  to={`/products/${products.id}/edit`}
+                  className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-border"
+                >
+                  Edit
+                </Link>
 
-              <button
-                type="button"
-                onClick={() => deletedProduct?.(products.id)}
-                className="flex-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-secondary-text transition hover:bg-border"
-              >
-                Delete
-              </button>
+                <button
+                  type="button"
+                  onClick={() => deletedProduct?.(products.id)}
+                  className="flex-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-secondary-text transition hover:bg-border"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
