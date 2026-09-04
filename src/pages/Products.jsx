@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { LoadingState, ErrorState, EmptyState } from "../components/ProductStates";
 import { useState } from "react";
-
+import Swal from "sweetalert2";
 function Products({ product = [], isLoading, error, deletedProduct }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("All");
@@ -31,6 +31,30 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
     setSearchQuery("");
     setCategoryFilter("All");
     setStockFilter("All");
+  };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This product will be permanently deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deletedProduct?.(id);
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "The product has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    });
   };
 
   if (isLoading) {
@@ -133,8 +157,8 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
 
                 <button
                   type="button"
-                  onClick={() => deletedProduct?.(products.id)}
-                  className="flex-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-secondary-text transition hover:bg-border"
+                  onClick={() => handleDelete(products.id)}
+                  className="flex-1 rounded-lg border border-red-500 bg-red-50 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-300"
                 >
                   Delete
                 </button>

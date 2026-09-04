@@ -21,16 +21,6 @@
       "dateAdded": "2026-08-21"
     },
     {
-      "id": "3",
-      "name": "Laptop",
-      "description": "15-inch business laptop",
-      "category": "Electronics",
-      "price": 35000,
-      "stock": 8,
-      "supplier": "ABC Computers",
-      "dateAdded": "2026-08-21"
-    },
-    {
       "id": "4",
       "name": "Office Chair",
       "description": "Ergonomic office chair",
@@ -99,26 +89,6 @@
       "supplier": "Ninja HQ",
       "dateAdded": "2026-09-02",
       "id": "ebkQiwfNe24"
-    },
-    {
-      "name": "N-Vison Monitor 144Hz 27' inches",
-      "description": "das",
-      "category": "Accessories",
-      "price": 4700,
-      "stock": 20,
-      "supplier": "Ninja HQ",
-      "dateAdded": "2026-09-02",
-      "id": "DY4cLeo48w8"
-    },
-    {
-      "name": "N-Vison Monitor 144Hz 27' inches",
-      "description": "sda",
-      "category": "Accessories",
-      "price": 4700,
-      "stock": 20,
-      "supplier": "Ninja HQ",
-      "dateAdded": "2026-09-02",
-      "id": "LOZw6Auabpk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
