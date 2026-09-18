@@ -73,3 +73,143 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+/* Design System Utilities */
+@layer utilities {
+  /* Gradient backgrounds */
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, #F4C430 0%, #E4B521 100%);
+  }
+  
+  .bg-gradient-surface {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F5F3EE 100%);
+  }
+  
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  }
+  
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  /* Animation utilities */
+  .animate-in {
+    animation: animate-in 0.2s ease-out;
+  }
+  
+  .slide-in-from-top {
+    animation: slide-in-from-top 0.2s ease-out;
+  }
+  
+  .fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+  
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  
+  /* Focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2;
+  }
+  
+  /* Interactive states */
+  .interactive-surface {
+    @apply transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0;
+  }
+  
+  .interactive-border {
+    @apply transition-all duration-200 hover:border-accent/50 hover:shadow-sm;
+  }
+  
+  /* Glass morphism */
+  .glass {
+    @apply bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60;
+  }
+  
+  .glass-border {
+    @apply border-border/50;
+  }
+}
+
+/* Animations */
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-text);
+}
+
+/* Selection styles */
+::selection {
+  background-color: rgba(244, 196, 48, 0.3);
+  color: var(--color-primary-text);
+}

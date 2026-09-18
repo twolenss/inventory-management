@@ -32,7 +32,7 @@
     },
     {
       "id": "5",
-      "name": "USB-C Cable",
+      "name": "USB-c Cable",
       "description": "1-meter USB-C charging and data cable",
       "category": "Accessories",
       "price": 450,
@@ -81,14 +81,14 @@
       "id": "EaFXW6cnvVk"
     },
     {
-      "name": "N-Vison Monitor 144Hz 27' inches",
-      "description": "asddsad",
-      "category": "Accessories",
-      "price": 4700,
-      "stock": 20,
-      "supplier": "Ninja HQ",
-      "dateAdded": "2026-09-02",
-      "id": "ebkQiwfNe24"
+      "name": "Nitro V15 Intel Core I5 W13",
+      "description": "The Acer Nitro V15 is powered by 13th Gen Intel® Core™ i5 or i7 processors, providing fast and efficient performance for gaming, content creation, and multitasking \nAcer United States\nAcer United States\n+1\n. It comes equipped with NVIDIA GeForce RTX 40 or 50 Series Laptop GPUs, including models like the RTX 4060 and RTX 5060, delivering AI-enhanced graphics, ray tracing, and high frame rates for immersive gameplay \nAcer United States\nAcer United States\n+2\n. The laptop supports DDR5 RAM up to 32GB, ensuring smooth multitasking and rapid data access, while PCIe Gen4 NVMe SSDs offer read/write speeds up to 7 GB/s for fast boot times and game loading",
+      "category": "Electronics/Laptop",
+      "price": 49000,
+      "stock": 200,
+      "supplier": "Acer Company",
+      "dateAdded": "2026-09-07",
+      "id": "pSv7NmBjncs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ArrowLeft, Package, Tag, DollarSign, Box, Truck, FileText, Save, X, CheckCircle, AlertCircle } from "lucide-react";
 
-// --------------------------------------------------
-// INPUT FIELD
-// --------------------------------------------------
 const InputField = ({ id, label, icon: Icon, type = "text", value, onChange, placeholder, error, ...props }) => (
   <div className="space-y-2">
     <label htmlFor={id} className="flex items-center gap-2 text-sm font-medium text-secondary-text">
@@ -48,9 +45,6 @@ const InputField = ({ id, label, icon: Icon, type = "text", value, onChange, pla
   </div>
 );
 
-// --------------------------------------------------
-// PRODUCT FORM
-// --------------------------------------------------
 function ProductForm({ mode = "add", initialData = null, onSubmit }) {
   const navigate = useNavigate();
 
@@ -64,9 +58,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
-  // --------------------------------------------------
-  // LOAD EDIT DATA
-  // --------------------------------------------------
   useEffect(() => {
     if (mode === "edit" && initialData) {
       setName(initialData.name || "");
@@ -78,9 +69,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     }
   }, [mode, initialData]);
 
-  // --------------------------------------------------
-  // VALIDATION
-  // --------------------------------------------------
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -110,17 +99,9 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
 
     return newErrors;
   };
-
-  // --------------------------------------------------
-  // CHECK IF FORM HAS DATA
-  // --------------------------------------------------
   const hasFormInput = () => {
     return name.trim() || desc.trim() || category.trim() || String(price).trim() || String(stock).trim() || supplier.trim();
   };
-
-  // --------------------------------------------------
-  // CANCEL
-  // --------------------------------------------------
   const handleCancel = () => {
     if (hasFormInput()) {
       Swal.fire({
@@ -142,9 +123,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     }
   };
 
-  // --------------------------------------------------
-  // SUBMIT
-  // --------------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -175,9 +153,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       return;
     }
 
-    // --------------------------------------------------
-    // PREPARE DATA
-    // --------------------------------------------------
     const data = {
       name: name.trim(),
       description: desc.trim(),
@@ -187,7 +162,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       supplier: supplier.trim(),
     };
 
-    // Only add date when creating
     if (mode === "add") {
       data.dateAdded = new Date().toLocaleDateString("en-CA");
     }
@@ -195,28 +169,11 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
     console.log("Submitting:", data);
 
     try {
-      // ------------------------------------------------
-      // SAVE TO API / STATE
-      // ------------------------------------------------
       const result = await onSubmit(data);
-
-      console.log("Save successful:", result);
-
-      // ------------------------------------------------
-      // STOP LOADING
-      // ------------------------------------------------
       setIsSubmitting(false);
-
-      // ------------------------------------------------
-      // NAVIGATE TO PRODUCTS
-      // ------------------------------------------------
       navigate("/products", {
         replace: true,
       });
-
-      // ------------------------------------------------
-      // SUCCESS MESSAGE
-      // ------------------------------------------------
       Swal.fire({
         title: "Success!",
         text: mode === "add" ? "Product added successfully." : "Product updated successfully.",
@@ -226,9 +183,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
       });
     } catch (error) {
       console.error("Save failed:", error);
-
       setIsSubmitting(false);
-
       Swal.fire({
         title: "Error!",
         text: error?.message || "Failed to save product. Please try again.",
@@ -245,9 +200,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
 
   const buttonText = isAddMode ? "Add Product" : "Update Product";
 
-  // --------------------------------------------------
-  // UI
-  // --------------------------------------------------
   return (
     <div className="mx-auto max-w-2xl">
       {/* HEADER */}
@@ -387,9 +339,6 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
           </button>
         </div>
       </form>
-
-
-    
     </div>
   );
 }
