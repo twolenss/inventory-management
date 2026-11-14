@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5002/products";
+const BASE_URL = "http://localhost:8000/products";
 
 async function handleResponse(response) {
   if (!response.ok) {

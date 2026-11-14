@@ -48,36 +48,27 @@ function ProductsDetails() {
     <div className="mx-auto max-w-2xl rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border sm:p-8">
       <h1 className="mb-6 text-3xl font-bold text-primary-text">{product.name}</h1>
 
-      <div className="space-y-4 text-secondary-text">
-        <p>
-          <strong className="font-semibold text-primary-text">Description:</strong>{" "}
-          {product.description}
-        </p>
+      {/* COMMENT: Simplified product details - products now only have id, name, and price */}
+      <div className="space-y-6">
+        <div className="rounded-lg bg-background p-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <p className="text-sm font-medium text-secondary-text">Product ID</p>
+              <p className="text-lg font-semibold text-primary-text">{product.id}</p>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-secondary-text">Price</p>
+              <p className="text-2xl font-bold text-primary-text">₱{product.price}</p>
+            </div>
+          </div>
+        </div>
 
-        <p>
-          <strong className="font-semibold text-primary-text">Category:</strong>{" "}
-          {product.category}
-        </p>
-
-        <p>
-          <strong className="font-semibold text-primary-text">Price:</strong>{" "}
-          ₱{product.price}
-        </p>
-
-        <p>
-          <strong className="font-semibold text-primary-text">Stock:</strong>{" "}
-          {product.stock}
-        </p>
-
-        <p>
-          <strong className="font-semibold text-primary-text">Supplier:</strong>{" "}
-          {product.supplier}
-        </p>
-
-        <p>
-          <strong className="font-semibold text-primary-text">Date Added:</strong>{" "}
-          {product.dateAdded}
-        </p>
+        <div className="rounded-lg bg-background p-4">
+          <p className="text-sm font-medium text-secondary-text mb-2">Product Information</p>
+          <p className="text-primary-text">
+            This product follows the simplified inventory structure with only essential information.
+          </p>
+        </div>
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
