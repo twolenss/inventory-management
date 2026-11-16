@@ -4,6 +4,12 @@
       "id": "1",
       "name": "Product 1",
       "price": 10.99
+    },
+    {
+      "name": "asda",
+      "price": 12,
+      "id": "dg9G7IEz9jU"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
