@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Package, LayoutDashboard, Tag } from "lucide-react";
-
+import { Menu, X, Package, LayoutDashboard, Tag, User, Bell } from "lucide-react";
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
