@@ -1,5 +1,12 @@
-const BASE_URL = "http://localhost:8000/products";
+const BASE_URL = "/api/products";
+function getAuthHeaders() {
+  const token = localStorage.getItem("token");
 
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+}
 async function handleResponse(response) {
   if (!response.ok) {
     throw new Error("Request Failed");
@@ -10,20 +17,22 @@ async function handleResponse(response) {
 }
 
 export async function getProducts() {
-  const response = await fetch(BASE_URL);
+  const response = await fetch(BASE_URL, {
+    headers: getAuthHeaders(),
+  });
   return handleResponse(response);
 }
 
 export async function getSingleProduct(id) {
-  const response = await fetch(`${BASE_URL}/${id}`);
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    headers: getAuthHeaders(),
+  });
   return handleResponse(response);
 }
 export async function createProduct(product) {
   const response = await fetch(BASE_URL, {
     method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
+    headers: getAuthHeaders(),
     body: JSON.stringify(product),
   });
   return handleResponse(response);
@@ -31,9 +40,7 @@ export async function createProduct(product) {
 export async function updateProduct(product, id) {
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "PATCH",
-    headers: {
-      "Content-type": "application/json",
-    },
+    headers: getAuthHeaders(),
     body: JSON.stringify(product),
   });
   return handleResponse(response);
@@ -42,6 +49,7 @@ export async function updateProduct(product, id) {
 export async function deleteProduct(id) {
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
   return handleResponse(response);
 }

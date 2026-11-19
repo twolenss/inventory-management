@@ -12,7 +12,7 @@ const useProducts = () => {
         setLoading(true);
         setError(null);
         const data = await getProducts();
-        setProduct(Array.isArray(data) ? data : null);
+        setProduct(data.products)
       } catch (err) {
         setError(err.message || "An error occurred while fetching products");
       } finally {
@@ -24,7 +24,7 @@ const useProducts = () => {
 
   const createdProduct = async (product) => {
     const createdProduct = await createProduct(product);
-    setProduct((prevProduct) => [...prevProduct, createdProduct]);
+    setProduct((prevProduct) => [...prevProduct, createdProduct.product]);
     return createdProduct;
   };
 
