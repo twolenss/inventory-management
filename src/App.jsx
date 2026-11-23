@@ -10,22 +10,32 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import useProducts from "./hooks/useProducts";
 import Layout from "./layout/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
-  const { product , error, isLoading, updProduct, createdProduct, deletedProduct} = useProducts();
+  const { product, error, isLoading, updProduct, createdProduct, deletedProduct } = useProducts();
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
+          {" "}
           <Route index element={<Dashboard product={product} />} />
           <Route path="products">
-            <Route index element={<Products product={product} error={error} isLoading={isLoading} deletedProduct={deletedProduct}/>} />
+            <Route index element={<Products product={product} error={error} isLoading={isLoading} deletedProduct={deletedProduct} />} />
             <Route path=":id" element={<ProductsDetails />} />
             <Route path="add" element={<AddProduct createdProduct={createdProduct} />} />
             <Route path=":id/edit" element={<EditProduct updProduct={updProduct} />} />
           </Route>
-          <Route path="categories" element={<Categories product={product}/>} />
+          <Route path="categories" element={<Categories product={product} />} />
         </Route>
       </Routes>
     </BrowserRouter>
