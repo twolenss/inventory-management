@@ -10,7 +10,7 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import useProducts from "./hooks/useProducts";
 import Layout from "./layout/Layout";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "../src/components/ProtectedRoutes";
 
 function App() {
   const { product, error, isLoading, updProduct, createdProduct, deletedProduct } = useProducts();
