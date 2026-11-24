@@ -9,6 +9,9 @@ function ProductsDetails() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user?.role === "admin";
+
   useEffect(() => {
     async function fetchProduct() {
       try {
@@ -65,26 +68,20 @@ function ProductsDetails() {
 
         <div className="rounded-lg bg-background p-4">
           <p className="text-sm font-medium text-secondary-text mb-2">Product Information</p>
-          <p className="text-primary-text">
-            This product follows the simplified inventory structure with only essential information.
-          </p>
+          <p className="text-primary-text">This product follows the simplified inventory structure with only essential information.</p>
         </div>
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
-        <Link
-          to="/products"
-          className="rounded-lg border border-border bg-background px-4 py-2 text-primary-text transition hover:bg-border"
-        >
+        <Link to="/products" className="rounded-lg border border-border bg-background px-4 py-2 text-primary-text transition hover:bg-border">
           Back to Products
         </Link>
 
-        <Link
-          to={`/products/${product.id}/edit`}
-          className="rounded-lg bg-accent px-4 py-2 text-primary-text transition hover:bg-[#e4b521]"
-        >
-          Edit Product
-        </Link>
+        {isAdmin && (
+          <Link to={`/products/${product.id}/edit`} className="rounded-lg bg-accent px-4 py-2 text-primary-text transition hover:bg-[#e4b521]">
+            Edit Product
+          </Link>
+        )}
       </div>
     </div>
   );

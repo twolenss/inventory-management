@@ -5,7 +5,7 @@ function Dashboard({ product = [] }) {
   // Other fields (description, category, stock, supplier, dateAdded) are not saved
   
   const totalValue = product.reduce(
-    (total, item) => total + item.price,
+    (total, item) => total + Number(item.price),
     0
   );
 

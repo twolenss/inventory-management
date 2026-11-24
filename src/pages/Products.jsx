@@ -4,6 +4,9 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 function Products({ product = [], isLoading, error, deletedProduct }) {
+  const isUser = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = isUser?.role === "admin";
+
   const [searchQuery, setSearchQuery] = useState("");
 
   // COMMENT: Filtering by name only since other fields might not exist in the data
@@ -57,9 +60,11 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
       <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-3xl font-bold text-primary-text">Products</h2>
 
-        <Link to="/products/add" className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-medium text-primary-text transition hover:bg-[#e4b521]">
-          Add Product
-        </Link>
+        {isAdmin && (
+          <Link to="/products/add" className="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2.5 font-medium text-primary-text transition hover:bg-[#e4b521]">
+            Add Product
+          </Link>
+        )}
       </div>
 
       {/* Search */}
@@ -102,7 +107,7 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
                   <span className="text-sm font-medium text-secondary-text">Price:</span>
                   <span className="text-lg font-semibold text-primary-text">₱{products.price}</span>
                 </div>
-                
+
                 {/* COMMENT: These fields might exist in old data but are not saved in new submissions */}
                 {products.category && (
                   <div className="flex justify-between">
@@ -110,26 +115,24 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
                     <span className="text-sm text-primary-text">{products.category}</span>
                   </div>
                 )}
-                
+
                 {products.stock !== undefined && (
                   <div className="flex justify-between">
                     <span className="text-sm font-medium text-secondary-text">Stock:</span>
                     <span className="text-sm text-primary-text">{products.stock} units</span>
                   </div>
                 )}
-                
+
                 {products.supplier && (
                   <div className="flex justify-between">
                     <span className="text-sm font-medium text-secondary-text">Supplier:</span>
                     <span className="text-sm text-primary-text">{products.supplier}</span>
                   </div>
                 )}
-                
+
                 {/* COMMENT: Note about data structure */}
                 <div className="mt-2 pt-2 border-t border-border/30">
-                  <p className="text-xs text-secondary-text/70">
-                    Note: Only name and price are saved for new products
-                  </p>
+                  <p className="text-xs text-secondary-text/70">Note: Only name and price are saved for new products</p>
                 </div>
               </div>
 
@@ -140,14 +143,15 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
                 >
                   View
                 </Link>
-
-                <Link
-                  to={`/products/${products.id}/edit`}
-                  className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-border"
-                >
-                  Edit
-                </Link>
-
+                { isAdmin && (
+                  <>
+                  <Link
+                    to={`/products/${products.id}/edit`}
+                    className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-center text-sm font-medium text-primary-text transition hover:bg-border"
+                  >
+                    Edit
+                  </Link>
+                
                 <button
                   type="button"
                   onClick={() => handleDelete(products.id)}
@@ -155,6 +159,8 @@ function Products({ product = [], isLoading, error, deletedProduct }) {
                 >
                   Delete
                 </button>
+                </>
+                )}
               </div>
             </div>
           ))}
