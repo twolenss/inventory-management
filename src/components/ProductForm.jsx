@@ -5,7 +5,7 @@ import {
   ArrowLeft, 
   Package, 
   Tag,  
-  DollarSign,
+  PhilippinePeso,
   Box, 
   Truck, 
   FileText,
@@ -156,8 +156,8 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
 
     try {
       // Call the onSubmit prop function
-      await onSubmit(data);
-
+const createdProduct = await onSubmit(data);
+console.log("Created product from API:", createdProduct.product);
       // Show success message
       await Swal.fire({
         title: "Success!",
@@ -236,7 +236,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
           />
 
           {/* COMMENT: Category field - visible but data not submitted */}
-          <InputField
+          {/* <InputField
             id="category"
             label="Category (Not Saved)"
             icon={Tag}
@@ -246,12 +246,12 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
             placeholder="e.g., Electronics, Furniture"
             // error={errors.category} // COMMENT: Not validating since not submitted
             // required // COMMENT: Not required since not submitted
-          />
+          /> */}
 
           <InputField
             id="price"
             label="Price"
-            icon={DollarSign}
+            icon={PhilippinePeso}
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -263,21 +263,21 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
           />
 
           {/* COMMENT: Stock field - visible but data not submitted */}
-          <InputField
-            id="stock"
-            label="Stock Quantity (Not Saved)"
-            icon={Box}
-            type="number"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-            placeholder="Enter quantity"
-            min="0"
-            // error={errors.stock} // COMMENT: Not validating since not submitted
-            // required // COMMENT: Not required since not submitted
-          />
+            {/* <InputField
+              id="stock"
+              label="Stock Quantity (Not Saved)"
+              icon={Box}
+              type="number"
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
+              placeholder="Enter quantity"
+              min="0"
+              // error={errors.stock} // COMMENT: Not validating since not submitted
+              // required // COMMENT: Not required since not submitted
+            /> */}
 
           {/* COMMENT: Supplier field - visible but data not submitted */}
-          <InputField
+          {/* <InputField
             id="supplier"
             label="Supplier (Not Saved)"
             icon={Truck}
@@ -287,11 +287,11 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
             placeholder="Supplier name"
             // error={errors.supplier} // COMMENT: Not validating since not submitted
             // required // COMMENT: Not required since not submitted
-          />
+          /> */}
         </div>
 
         {/* COMMENT: Description field - visible but data not submitted */}
-        <InputField
+        {/* <InputField
           id="desc"
           label="Description (Not Saved)"
           icon={FileText}
@@ -301,7 +301,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
           placeholder="Describe the product features, specifications, and other details..."
           // error={errors.desc} // COMMENT: Not validating since not submitted
           // required // COMMENT: Not required since not submitted
-        />
+        /> */}
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
           <button
@@ -359,7 +359,7 @@ function ProductForm({ mode = "add", initialData = null, onSubmit }) {
         <div className="rounded-xl bg-green-50 p-4 ring-1 ring-green-100">
           <div className="flex items-center gap-3">
             <div className="rounded-lg bg-green-100 p-2">
-              <DollarSign className="h-5 w-5 text-green-600" />
+              <PhilippinePeso className="h-5 w-5 text-green-600" />
             </div>
             <div>
               <p className="text-sm font-medium text-green-800">Data Structure</p>
