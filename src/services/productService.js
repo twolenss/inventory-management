@@ -17,7 +17,7 @@ async function handleResponse(response) {
 }
 
 export async function getProducts() {
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}?sort=id&order=desc&limit=100`, {
     headers: getAuthHeaders(),
   });
   return handleResponse(response);

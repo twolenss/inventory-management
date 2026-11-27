@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Package, LayoutDashboard, Tag, User, Bell } from "lucide-react";
+import { Menu, X, Package, LayoutDashboard, Tag, User, Bell, LogOut } from "lucide-react";
+
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -9,6 +10,16 @@ function Navbar() {
     { name: "Inventory", href: "/products", icon: Package },
     { name: "Categories", href: "/categories", icon: Tag },
   ];
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear authentication data
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Redirect to login page
+    navigate("/login");
+  };
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -28,7 +39,7 @@ function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           <div className="flex items-center gap-1 rounded-full bg-surface/50 p-1 shadow-sm ring-1 ring-border/30">
             {navigation.map((item) => {
               const Icon = item.icon;
@@ -38,9 +49,7 @@ function Navbar() {
                   to={item.href}
                   className={({ isActive }) =>
                     `flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? "bg-accent text-primary-text shadow-sm"
-                        : "text-secondary-text hover:bg-border/50 hover:text-primary-text"
+                      isActive ? "bg-accent text-primary-text shadow-sm" : "text-secondary-text hover:bg-border/50 hover:text-primary-text"
                     }`
                   }
                 >
@@ -51,19 +60,22 @@ function Navbar() {
             })}
           </div>
 
-    
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 rounded-full border border-red-500/20 px-4 py-2 text-sm font-medium text-red-500 transition hover:bg-red-500/10"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="rounded-md p-2 text-secondary-text transition hover:bg-border/50 hover:text-primary-text md:hidden"
         >
-          {isMobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
@@ -81,9 +93,7 @@ function Navbar() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium transition ${
-                        isActive
-                          ? "bg-accent/10 text-primary-text"
-                          : "text-secondary-text hover:bg-border/50 hover:text-primary-text"
+                        isActive ? "bg-accent/10 text-primary-text" : "text-secondary-text hover:bg-border/50 hover:text-primary-text"
                       }`
                     }
                   >
@@ -93,6 +103,8 @@ function Navbar() {
                 );
               })}
             </div>
+
+            {/* Mobile User Info */}
             <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-4">
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-border/50">
@@ -103,13 +115,21 @@ function Navbar() {
                   <p className="text-xs text-secondary-text">Inventory Manager</p>
                 </div>
               </div>
+
               <button className="relative rounded-full p-2 text-secondary-text hover:text-primary-text">
                 <Bell className="h-5 w-5" />
-                <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
-                  3
-                </span>
+                <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-red-500 text-[10px] text-white">3</span>
               </button>
             </div>
+
+            {/* Mobile Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-red-500/20 px-4 py-3 text-sm font-medium text-red-500 transition hover:bg-red-500/10"
+            >
+              <LogOut className="h-5 w-5" />
+              Logout
+            </button>
           </div>
         </div>
       )}

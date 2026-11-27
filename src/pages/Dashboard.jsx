@@ -12,7 +12,7 @@ function Dashboard({ product = [] }) {
   const averagePrice = totalProducts > 0 ? (totalValue / totalProducts).toFixed(2) : 0;
 
   // Show all products - no dateAdded field for sorting by recent
-  const displayProducts = product.slice(0, 6);
+  const displayProducts = product.slice(0, 5);
 
   return (
     <div className="space-y-8 bg-background p-2 md:p-4">
@@ -21,7 +21,7 @@ function Dashboard({ product = [] }) {
       {/* COMMENT: Note about simplified data structure */}
       <div className="rounded-2xl bg-surface/50 p-4 ring-1 ring-border">
         <p className="text-sm text-secondary-text">
-          Note: Products now use simplified structure (id, name, price only). 
+          Note: Products now use simplified structure. 
           Other fields are visible in UI but not saved to database.
         </p>
       </div>
@@ -42,13 +42,13 @@ function Dashboard({ product = [] }) {
         <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
           <p className="text-sm font-medium text-secondary-text">Average Price</p>
           <p className="mt-2 text-3xl font-bold text-accent">
-            ₱ {averagePrice}
+            ₱ {averagePrice} 
           </p>
         </div>
       </div>
 
       <div className="rounded-2xl bg-surface p-6 shadow-sm ring-1 ring-border">
-        <h2 className="mb-4 text-2xl font-semibold text-primary-text">Products Overview</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-primary-text">Recently Added Products</h2>
 
         <div className="space-y-3">
           {displayProducts.length > 0 ? (
@@ -59,7 +59,6 @@ function Dashboard({ product = [] }) {
               >
                 <div>
                   <p className="font-medium text-primary-text">{item.name}</p>
-                  <p className="text-xs text-secondary-text">ID: {item.id}</p>
                 </div>
                 <p className="text-lg font-semibold text-primary-text">₱{item.price}</p>
               </div>
